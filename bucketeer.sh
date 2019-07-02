@@ -71,7 +71,7 @@ check_prefix() {
   local bucket_part="${1}"
   
   # from @nahamsec's lazys3
-  ENVIRONMENTS=(backup dev development stage s3 staging prod production test)
+  ENVIRONMENTS=(backup dev development stage s3 staging sandbox qa prod production test)
   
   # simple
   test_bucket "${NAME}-${bucket_part}"
@@ -118,6 +118,29 @@ check_prefix() {
     test_bucket "${ENV}-${bucket_part}${NAME}"
     test_bucket "${ENV}.${bucket_part}-${NAME}"
     test_bucket "${ENV}.${bucket_part}.${NAME}"
+    
+    test_bucket "${bucket_part}-${NAME}-${ENV}"
+    test_bucket "${bucket_part}-${NAME}.${ENV}"
+    test_bucket "${bucket_part}-${NAME}${ENV}"
+    test_bucket "${bucket_part}.${NAME}-${ENV}"
+    test_bucket "${bucket_part}.${NAME}.${ENV}"
+    
+    test_bucket "${bucket_part}-${NAME}-${ENV}-${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}-${ENV}.${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}-${ENV}${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}.${ENV}.${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}.${ENV}-${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}.${ENV}${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}${ENV}${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}${ENV}.${bucket_part}"
+    test_bucket "${bucket_part}-${NAME}${ENV}-${bucket_part}"
+    test_bucket "${bucket_part}.${NAME}-${ENV}-${bucket_part}"
+    test_bucket "${bucket_part}.${NAME}-${ENV}.${bucket_part}"
+    test_bucket "${bucket_part}.${NAME}-${ENV}${bucket_part}"
+    test_bucket "${bucket_part}.${NAME}.${ENV}${bucket_part}"
+    test_bucket "${bucket_part}.${NAME}.${ENV}.${bucket_part}"
+    test_bucket "${bucket_part}.${NAME}.${ENV}-${bucket_part}"
+    
   done
 }
 
